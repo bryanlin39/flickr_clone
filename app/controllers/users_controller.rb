@@ -1,9 +1,8 @@
 class UsersController < ApplicationController
 
-  def profile
+  def show
     @user = current_user
     @images = @user.images
-    render :profile
   end
 
 end

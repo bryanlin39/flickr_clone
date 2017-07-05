@@ -1,19 +1,11 @@
 Rails.application.routes.draw do
-  get 'images/new'
+  root :to => 'picture#all'
 
-  get 'images/show'
+  devise_for :users
 
-  root :to => 'users#profile'
-
-  get 'image/index'
-
-  get 'image/show'
-
-  resources :users do
-    resources :images, :except => [:index] do
+  resources :users, :only => [:show] do
+    resources :images do
       resources :tags
     end
   end
-  devise_for :users
-
 end

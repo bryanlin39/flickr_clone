@@ -3,11 +3,7 @@
 <h3>Here are all your photos!</h3>
 
 <% @images.each do |image| %>
-  <%= image_tag image.upload.url %>
-  <%= image_tag image.upload.url(:medium) %>
-  <%= image_tag image.upload.url(:thumb) %>
+  <a href='/users/<%= @user.id %>/images/<%= image.id %>'><%= image_tag image.upload.url %></a>
 <% end %>
 
 <%= link_to 'Add new image', new_user_image_path(@user) %>
-
-<!--  display all photos -->

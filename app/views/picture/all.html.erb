@@ -1,0 +1,5 @@
+<h1>All Pictures</h1>
+
+<% @images.each do |picture| %>
+  <%= link_to image_tag(picture.upload.url), user_image_path(picture.user, picture)%>
+<% end %>

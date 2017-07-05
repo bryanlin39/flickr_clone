@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def after_sign_out_path_for(resource_or_scope)
+    root_path
+  end
+
   def configure_permitted_parameters
       devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:name, :email, :password) }
       devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:name, :email, :password, :current_password, :is_female, :date_of_birth, :avatar) }
