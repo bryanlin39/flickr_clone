@@ -6,4 +6,16 @@
   <a href='/users/<%= @user.id %>/images/<%= image.id %>'><%= image_tag image.upload.url %></a>
 <% end %>
 
+<h3>Here are your favorite images</h3>
+<% @user.favorites.each do |favorite| %>
+  <% favorite_image = Image.find(favorite) %>
+  <a href='/users/<%= favorite_image.user.id %>/images/<%= favorite_image.id %>'><%= image_tag favorite_image.upload.url %></a>
+<% end %>
+<hr>
+
 <%= link_to 'Add new image', new_user_image_path(@user) %>
+
+<h3>Tagged In:</h3>
+<% Image.tagged(@user).each do |image| %>
+  <%= image_tag image.upload.url %>
+<% end %>

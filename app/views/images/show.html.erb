@@ -1,5 +1,30 @@
 <h1>Submitted by: <%=@user.email%></h1>
+<% if current_user %>
+  <% if current_user.in_favorites(@image.id) %>
+    <%= button_to 'Unfavorite', unfavorite_path, :method => :patch %>
+  <% else %>
+    <%= button_to 'Add to Favorites', favorite_path, :method => :patch %>
+  <% end %>
+<% end %>
 
 <%= image_tag @image.upload.url %>
 <hr>
-<%= link_to 'Delete Image', user_image_path, :method => 'delete'%>
+<% if user_image? %>
+  <%= link_to 'Delete Image', user_image_path, :method => 'delete'%>
+<% end %>
+
+<h3>Tagged Users</h3>
+<ul>
+<% @image.tags.each do |tag| %>
+  <% user = User.find(tag) %>
+  <li><%= user.email %></li>
+<% end %>
+</ul>
+
+
+<h3>Add Tags</h3>
+<%= form_tag(tag_path, :method => 'patch') do %>
+  <%= label_tag(:username, 'Enter username:') %>
+  <%= text_field_tag(:username) %>
+  <%= submit_tag('Tag') %>
+<% end %>
